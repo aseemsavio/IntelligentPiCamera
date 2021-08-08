@@ -12,8 +12,9 @@ repositories {
 }
 
 dependencies {
-    // https://mvnrepository.com/artifact/org.tensorflow/tensorflow
-    implementation("org.tensorflow:tensorflow:1.14.0")
+
+    // https://github.com/chen0040/java-ssd-object-detection
+    implementation("com.github.chen0040:java-ssd-object-detection:1.0.1")
 
     testImplementation(kotlin("test"))
 }
