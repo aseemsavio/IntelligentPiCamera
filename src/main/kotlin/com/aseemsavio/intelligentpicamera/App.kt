@@ -1,5 +1,7 @@
 package com.aseemsavio.intelligentpicamera
 
+import org.tensorflow.TensorFlow
+
 /**
  * @author Aseem Savio
  *
@@ -10,5 +12,5 @@ class App {
 }
 
 fun main() {
-    println("Hello World!")
+    println(TensorFlow.version())
 }

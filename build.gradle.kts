@@ -12,6 +12,9 @@ repositories {
 }
 
 dependencies {
+    // https://mvnrepository.com/artifact/org.tensorflow/tensorflow
+    implementation("org.tensorflow:tensorflow:1.14.0")
+
     testImplementation(kotlin("test"))
 }
 
