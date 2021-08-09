@@ -7,9 +7,8 @@ import java.util.*
 /**
  * Accepts a lambda that will be run within the context of the [CameraConfigBuilder] class.
  */
-fun cameraConfig(lambda: CameraConfigBuilder.() -> Unit): CameraConfig {
-    return CameraConfigBuilder().apply(lambda).build()
-}
+fun cameraConfig(lambda: CameraConfigBuilder.() -> Unit): CameraConfig =
+    CameraConfigBuilder().apply(lambda).build()
 
 /**
  * Builds a [CameraConfig] object with a kick-ass DSL.
