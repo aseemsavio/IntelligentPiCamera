@@ -15,13 +15,13 @@ data class CameraConfig(
 )
 
 interface Server {
-    suspend fun forEverAndEver(lambda: () -> Unit)
+    suspend fun forEverAndEver(lambda: suspend () -> Unit)
     suspend fun stop()
 }
 
 class IntelligentCameraServer(private val cameraConfig: CameraConfig) : Server {
 
-    override suspend infix fun forEverAndEver(lambda: () -> Unit) =
+    override suspend infix fun forEverAndEver(lambda: suspend () -> Unit) =
         with(cameraConfig) {
             timer.schedule(ImageInferenceTask { lambda() }, 0, interval.value)
         }

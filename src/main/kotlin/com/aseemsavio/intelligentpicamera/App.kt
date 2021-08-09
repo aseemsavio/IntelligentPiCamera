@@ -1,7 +1,15 @@
 package com.aseemsavio.intelligentpicamera
 
+import com.aseemsavio.intelligentpicamera.App.Companion.period
+import com.aseemsavio.intelligentpicamera.App.Companion.timer
+import com.aseemsavio.intelligentpicamera.app.info
+import com.aseemsavio.intelligentpicamera.app.showWelcomeMessage
 import com.aseemsavio.intelligentpicamera.camera.dsl.cameraConfig
-import com.aseemsavio.intelligentpicamera.server.IntelligentCameraServer
+import com.aseemsavio.intelligentpicamera.model.dsl.loadModel
+import com.aseemsavio.intelligentpicamera.model.dsl.modelManager
+import com.aseemsavio.intelligentpicamera.model.infer
+import com.aseemsavio.intelligentpicamera.server.dsl.intelligentCameraServer
+import org.tensorflow.TensorFlow
 import java.util.*
 
 /**
@@ -11,30 +19,39 @@ import java.util.*
  */
 class App {
 
+    // todo: Move these over to an external config later.
+    companion object {
+        const val period = 1000L
+        val timer = Timer()
+    }
+
 }
 
 suspend fun main() {
 
-    // todo: Move these over to an external config later.
-    val period: Long = 2000
-
-    val cameraConfig = cameraConfig {
-        interval { period }
-        timer { Timer() }
+    showWelcomeMessage {
+        """
+                                           📸 Intelligent Pi Camera for Raspberry Pi 🥧
+                                                   🤖 Tensorflow Version: ${TensorFlow.version()}
+                                                        Model Name: Unknown
+        """
     }
 
-    val server = IntelligentCameraServer(cameraConfig)
+    val server = intelligentCameraServer {
+        cameraConfig {
+            interval { period }
+            timer { timer }
+        }
+    }
+
+    val modelManager = modelManager { "Model Manager Initialised." }
+    val model = loadModel(modelManager) { "Model loaded successfully! 🍺" }
 
     server forEverAndEver {
-        println("I'm being run every n seconds.")
-        println("Hey! multiple instruction")
+        with(modelManager) {
+            val response = model infer readImage()
+            info { "Response: $response" }
+        }
     }
-
-    /*val objectDetector = ObjectDetector()
-    objectDetector.loadModel()
-
-    val image = ImageIO.read(File("src/main/resources/images/friends.JPG"))
-    val results = objectDetector.detectObjects(image)
-    println(results)*/
 
 }
