@@ -1,6 +1,8 @@
 package com.aseemsavio.intelligentpicamera
 
-import org.tensorflow.TensorFlow
+import com.github.chen0040.objdetect.ObjectDetector
+import java.io.File
+import javax.imageio.ImageIO
 
 /**
  * @author Aseem Savio
@@ -12,5 +14,12 @@ class App {
 }
 
 fun main() {
-    println(TensorFlow.version())
+
+    val objectDetector = ObjectDetector()
+    objectDetector.loadModel()
+
+    val image = ImageIO.read(File("src/main/resources/images/friends.JPG"))
+    val results = objectDetector.detectObjects(image)
+    println(results)
+
 }
