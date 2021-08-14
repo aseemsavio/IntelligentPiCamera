@@ -1,7 +1,8 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.10"
+    kotlin("jvm") version "1.5.21"
+    kotlin("plugin.serialization") version "1.5.21"
 }
 
 group = "com.aseemsavio"
@@ -16,8 +17,18 @@ dependencies {
     // https://mvnrepository.com/artifact/org.jetbrains.kotlinx/kotlinx-coroutines-core
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
 
-    // https://github.com/chen0040/java-ssd-object-detection
-    implementation("com.github.chen0040:java-ssd-object-detection:1.0.1")
+    /*// https://github.com/chen0040/java-ssd-object-detection
+    implementation("com.github.chen0040:java-ssd-object-detection:1.0.1")*/
+
+    // Tensorflow Java API
+    implementation("org.tensorflow:tensorflow:1.5.0")
+    implementation("org.tensorflow:proto:1.5.0")
+
+    // to zip and unzip
+    implementation("net.lingala.zip4j:zip4j:1.3.2")
+
+    // json serialization
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.2.2")
 
     testImplementation(kotlin("test"))
 }
