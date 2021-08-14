@@ -2,8 +2,11 @@ package com.aseemsavio.intelligentpicamera
 
 import com.aseemsavio.intelligentpicamera.App.Companion.period
 import com.aseemsavio.intelligentpicamera.App.Companion.timer
-import com.aseemsavio.intelligentpicamera.app.showWelcomeMessage
+import com.aseemsavio.intelligentpicamera.common.showWelcomeMessage
 import com.aseemsavio.intelligentpicamera.camera.dsl.cameraConfig
+import com.aseemsavio.intelligentpicamera.common.info
+import com.aseemsavio.intelligentpicamera.common.readImage
+import com.aseemsavio.intelligentpicamera.model.infer
 import com.aseemsavio.intelligentpicamera.model.loadModel
 import com.aseemsavio.intelligentpicamera.server.dsl.intelligentCameraServer
 import org.tensorflow.TensorFlow
@@ -44,7 +47,8 @@ suspend fun main() {
     val (model, labels) = loadModel()
 
     server forEverAndEver {
-
+        val results = model.infer(readImage(), labels)
+        info { "Results: $results" }
     }
 
 }

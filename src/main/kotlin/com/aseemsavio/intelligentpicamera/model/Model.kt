@@ -1,6 +1,6 @@
 package com.aseemsavio.intelligentpicamera.model
 
-import com.aseemsavio.intelligentpicamera.app.info
+import com.aseemsavio.intelligentpicamera.common.info
 import com.aseemsavio.intelligentpicamera.common.Model
 import com.aseemsavio.intelligentpicamera.model.identifiers.LabelItem
 import com.aseemsavio.intelligentpicamera.common.Labels
@@ -49,7 +49,7 @@ internal suspend fun loadModel(): Model {
 
 private suspend fun loadDeepLearningModel(modelDirPath: FileName, vararg arguments: String) =
     SavedModelBundle.load(modelDirPath.value, *arguments)
-        .also { info { "Loaded model successfully!" } }
+        .also { info { "SSD Inception V2 COCO Model loaded successfully with argument(s): ${arguments.toList()}" } }
 
 /**
  * Extracts the model from the zipped file and stores it into [model] directory.
@@ -76,6 +76,7 @@ private suspend fun extractModel(utils: FileUtils) {
         writeToOutputStream(inputStream, buffer, outputStream)
         closeStreams(inputStream, outputStream)
         unzip(modelZipFileName, modelDirPath)
+        info { "Model Extracted successfully." }
     } catch (e: Exception) {
         println("Exception occurred: $e")
     }
@@ -87,7 +88,9 @@ private suspend fun extractModel(utils: FileUtils) {
  */
 private suspend fun loadLabels(utils: FileUtils): Labels {
     val labelsAsString = utils.getResourceAsString(FileName("labels/mscoco_label_map.json"))
-    return utils.getResourceAs<List<LabelItem>>(labelsAsString).associateBy { it.id }
+    return utils.getResourceAs<List<LabelItem>>(labelsAsString).associateBy { it.id }.also {
+        info { "Labels loaded successfully." }
+    }
 }
 
 private suspend fun unzip(modelZipFileName: String, modelDirPath: String) =
