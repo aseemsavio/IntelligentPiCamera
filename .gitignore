@@ -123,7 +123,12 @@ modules.xml
 .mtj.tmp/
 
 /tmp
+tmp
 tmp/
+
+/model
+model
+model/
 
 # Package Files #
 *.jar

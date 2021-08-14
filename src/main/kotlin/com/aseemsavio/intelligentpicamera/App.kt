@@ -2,12 +2,9 @@ package com.aseemsavio.intelligentpicamera
 
 import com.aseemsavio.intelligentpicamera.App.Companion.period
 import com.aseemsavio.intelligentpicamera.App.Companion.timer
-import com.aseemsavio.intelligentpicamera.app.info
 import com.aseemsavio.intelligentpicamera.app.showWelcomeMessage
 import com.aseemsavio.intelligentpicamera.camera.dsl.cameraConfig
-/*import com.aseemsavio.intelligentpicamera.model.dsl.loadModel
-import com.aseemsavio.intelligentpicamera.model.dsl.modelManager*/
-//import com.aseemsavio.intelligentpicamera.model.infer
+import com.aseemsavio.intelligentpicamera.model.loadModel
 import com.aseemsavio.intelligentpicamera.server.dsl.intelligentCameraServer
 import org.tensorflow.TensorFlow
 import java.util.*
@@ -43,6 +40,8 @@ suspend fun main() {
             timer { timer }
         }
     }
+
+    val (model, labels) = loadModel()
 
     server forEverAndEver {
 
