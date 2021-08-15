@@ -143,9 +143,7 @@ hs_err_pid*
 
 # Added by Aseem for Gradle.
 ### Gradle ###
-.gradle
 /build/
-gradle/
 
 # Ignore Gradle GUI config
 gradle-app.setting
