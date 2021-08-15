@@ -44,7 +44,7 @@ suspend fun SavedModelBundle.infer(image: BufferedImage, labels: Labels): List<D
             ImageLabel(labels[LabelId(imgClass.toInt())]?.displayName?.value!!),
             ImageScore(score)
         )
-    }
+    }.filter { it.score > ImageScore(0.5F) }
 }
 
 /**

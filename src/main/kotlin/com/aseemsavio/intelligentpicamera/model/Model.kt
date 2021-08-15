@@ -17,7 +17,14 @@ private const val MODEL_DIR_NAME = "ssd_inception_v2_coco"
 value class ImageLabel(val value: String)
 
 @JvmInline
-value class ImageScore(val value: Float)
+value class ImageScore(private val value: Float): Comparable<ImageScore> {
+    /**
+     * This function will be called while using the comparison operator like >, >=, etc.
+     */
+    override fun compareTo(other: ImageScore): Int {
+        return compareValuesBy(this, other, ImageScore::value)
+    }
+}
 
 @JvmInline
 value class FileName(val value: String) {
@@ -25,7 +32,6 @@ value class FileName(val value: String) {
         assert(value.contains("/"))
     }
 }
-
 
 data class DetectedObject(
     val label: ImageLabel,
