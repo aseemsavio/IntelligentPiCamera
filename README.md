@@ -1,5 +1,7 @@
 # Intelligent Pi Camera 📸
 
+[![Java CI with Gradle Actions Status](https://github.com/aseemsavio/IntelligentPiCamera/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/aseemsavio/IntelligentPiCamera/actions)
+
 An intelligent, people recognising camera module for the Raspberry Pi,
 powered by Deep Learning Models. This JVM application wraps a Deep Learning model
 and gets inferences from it in real time (every 1000 milliseconds). 
