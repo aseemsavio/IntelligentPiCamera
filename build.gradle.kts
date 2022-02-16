@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.5.21"
+    id("org.jetbrains.kotlin.jvm") version "1.6.20-M1"
     kotlin("plugin.serialization") version "1.5.21"
 }
 
@@ -38,7 +38,7 @@ tasks.test {
 }
 
 tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions.jvmTarget = "17"
 }
 
 val mainClass = "com.aseemsavio.intelligentpicamera.AppKt"
